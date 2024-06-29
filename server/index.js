@@ -8,10 +8,11 @@ app.use(cors());
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: "http://localhost:3000",
+    origin: "https://chat-app-gossip-client.vercel.app/",
     methods: ["GET", "POST"],
   },
 });
+// origin: "http://localhost:3000",
 
 const usersOnline = new Map();
 

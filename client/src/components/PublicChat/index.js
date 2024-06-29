@@ -15,8 +15,8 @@ const arr = [
   { sender: "you", message: "hi" },
 ];
 
-const socket = io.connect("https://chat-app-gossip.vercel.app/");
-// const socket = io.connect("http://localhost:3001");
+// const socket = io.connect("https://chat-app-gossip.vercel.app/");
+const socket = io.connect(process.env.REACT_APP_BACKEND_URL || "http://localhost:3001");
 
 const PublicChat = () => {
   const [username, setUsername] = useState("");

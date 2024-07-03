@@ -50,7 +50,7 @@ try {
       usersOnline.delete(socketId);
     });
   });
-  app.get("/", (req, res) => {
+  app.get("/health", (req, res) => {
     res.send("Server is running at 3001");
   });
 

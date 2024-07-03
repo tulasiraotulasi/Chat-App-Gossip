@@ -15,9 +15,10 @@ app.use(
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: "https://chat-app-gossip-client.vercel.app", // Specify your client origin
+    origin: "https://chat-app-gossip-client.vercel.app", // Specify the client origin
     methods: ["GET", "POST"],
   },
+  transports: ["websocket", "polling"], // Ensure both transports are supported
 });
 
 const usersOnline = new Map();

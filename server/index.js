@@ -4,7 +4,13 @@ const { Server } = require("socket.io");
 const cors = require("cors");
 const app = express();
 
-app.use(cors()); // Apply CORS middleware globally
+// app.use(cors()); // Apply CORS middleware globally
+app.use(
+  cors({
+    origin: "https://chat-app-gossip-client.vercel.app", // Specify the client origin
+    methods: ["GET", "POST"],
+  })
+);
 
 const server = http.createServer(app);
 const io = new Server(server, {

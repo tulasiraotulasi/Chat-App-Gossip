@@ -16,9 +16,12 @@ const arr = [
 ];
 
 // const socket = io.connect("https://chat-app-gossip.vercel.app/");
-const socket = io.connect(
-  "https://chat-app-gossip-server2.vercel.app" || "http://localhost:3001"
-);
+// const socket = io.connect(
+//   "https://chat-app-gossip-server2.vercel.app" || "http://localhost:3001"
+// );
+const socket = io.connect("https://chat-app-gossip-server2.vercel.app", {
+  transports: ["websocket", "polling"],
+});
 
 const PublicChat = () => {
   const [username, setUsername] = useState("");

@@ -51,7 +51,7 @@ try {
     });
   });
   app.get("/", (req, res) => {
-    res.send("Server is running");
+    res.send("Server is running at 3001");
   });
 
   server.listen(3001, (res, req) => {

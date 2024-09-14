@@ -56,6 +56,7 @@ app.get("/", (req, res) => {
       usersOnline.delete(socketId);
     });
   });
+  res.send("Server is running at 3001");
 });
 
 app.get("/health", (req, res) => {

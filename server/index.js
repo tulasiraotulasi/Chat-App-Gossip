@@ -23,36 +23,38 @@ const io = new Server(server, {
 
 const usersOnline = new Map();
 
-io.on("connection", (socket) => {
-  const socketId = socket.id;
-  console.log("User Connected: ", socket.id);
+app.get("/", (req, res) => {
+  io.on("connection", (socket) => {
+    const socketId = socket.id;
+    console.log("User Connected: ", socket.id);
 
-  socket.on("userJoining", (data) => {
-    console.log(data);
-    usersOnline.set(socketId, data.sender);
-    socket.broadcast.emit("joined", data);
-  });
-
-  socket.on("sendMessage", (data) => {
-    console.log(data.sender, ":", data.message);
-    socket.broadcast.emit("receiveMessage", data);
-  });
-
-  socket.on("checkUsers", () => {
-    console.log(usersOnline);
-    socket.emit("onlineUsers", {
-      sender: "Server",
-      message: usersOnline.size,
+    socket.on("userJoining", (data) => {
+      console.log(data);
+      usersOnline.set(socketId, data.sender);
+      socket.broadcast.emit("joined", data);
     });
-  });
 
-  socket.on("disconnect", () => {
-    console.log("user disconnected: ", usersOnline.get(socketId));
-    socket.broadcast.emit("userLeft", {
-      sender: usersOnline.get(socketId),
-      message: "leftTheChat",
+    socket.on("sendMessage", (data) => {
+      console.log(data.sender, ":", data.message);
+      socket.broadcast.emit("receiveMessage", data);
     });
-    usersOnline.delete(socketId);
+
+    socket.on("checkUsers", () => {
+      console.log(usersOnline);
+      socket.emit("onlineUsers", {
+        sender: "Server",
+        message: usersOnline.size,
+      });
+    });
+
+    socket.on("disconnect", () => {
+      console.log("user disconnected: ", usersOnline.get(socketId));
+      socket.broadcast.emit("userLeft", {
+        sender: usersOnline.get(socketId),
+        message: "leftTheChat",
+      });
+      usersOnline.delete(socketId);
+    });
   });
 });
 

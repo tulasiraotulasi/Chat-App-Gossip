@@ -7,7 +7,8 @@ const app = express();
 // app.use(cors()); // Apply CORS middleware globally
 app.use(
   cors({
-    origin: "https://chat-app-gossip-client.vercel.app", // Specify the client origin
+    // origin: "https://chat-app-gossip-client.vercel.app", // Specify the client origin
+    origin: "*", // Specify the client origin
     methods: ["GET", "POST"],
   })
 );
@@ -15,7 +16,7 @@ app.use(
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: "https://chat-app-gossip-client.vercel.app", // Specify the client origin
+    origin: "*", // Specify the client origin
     methods: ["GET", "POST"],
   },
   transports: ["websocket", "polling"], // Ensure both transports are supported
@@ -61,7 +62,7 @@ io.on("connection", (socket) => {
 });
 
 app.get("/health", (req, res) => {
-  res.send("Server is running at 3001");
+  res.send("Server is running at 3001 and u r in health route ");
 });
 
 server.listen(3001, () => {
